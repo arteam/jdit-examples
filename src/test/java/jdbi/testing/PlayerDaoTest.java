@@ -1,9 +1,9 @@
 package jdbi.testing;
 
-import com.github.arteam.dropwizard.testing.jdbi.DBIRunner;
-import com.github.arteam.dropwizard.testing.jdbi.annotations.DBIHandle;
-import com.github.arteam.dropwizard.testing.jdbi.annotations.DataSet;
-import com.github.arteam.dropwizard.testing.jdbi.annotations.TestedSqlObject;
+import com.github.arteam.jdit.DBIRunner;
+import com.github.arteam.jdit.annotations.DBIHandle;
+import com.github.arteam.jdit.annotations.DataSet;
+import com.github.arteam.jdit.annotations.TestedSqlObject;
 import com.google.common.collect.ImmutableList;
 import org.joda.time.format.ISODateTimeFormat;
 import org.junit.Test;
