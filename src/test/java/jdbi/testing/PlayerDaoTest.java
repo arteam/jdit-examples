@@ -24,7 +24,6 @@ import static org.junit.Assert.assertFalse;
  * @author Artem Prigoda
  */
 @RunWith(DBIRunner.class)
-@DataSet("playerDao/players.sql")
 public class PlayerDaoTest {
 
     @TestedSqlObject
@@ -36,7 +35,7 @@ public class PlayerDaoTest {
     @Test
     public void testCreatePlayer() {
         Long playerId = playerDao.createPlayer("Vladimir", "Tarasenko", date("1991-12-13"), 184, 90);
-        List<Map<String,Object>> rows = handle.select("select * from players where id=?", playerId);
+        List<Map<String, Object>> rows = handle.select("select * from players where id=?", playerId);
         assertFalse(rows.isEmpty());
 
         Map<String, Object> row = rows.get(0);
@@ -48,11 +47,14 @@ public class PlayerDaoTest {
         assertEquals(90, row.get("weight"));
     }
 
-@Test
-public void testGetPlayerListNames(){
-    List<String> playerLastNames = playerDao.getPlayerLastNames();
-    assertEquals(playerLastNames, ImmutableList.of("Ellis", "Seguin", "Tarasenko", "Tavares"));
-}
+    @Test
+    @DataSet("playerDao/players.sql")
+    public void testGetPlayerListNames() {
+        List<String> playerLastNames = playerDao.getPlayerLastNames();
+        assertEquals(playerLastNames, ImmutableList.of("Ellis", "Seguin", "Tarasenko", "Tavares"));
+    }
+
+
 
     private static Date date(String textDate) {
         return ISODateTimeFormat.date().parseDateTime(textDate).toDate();
