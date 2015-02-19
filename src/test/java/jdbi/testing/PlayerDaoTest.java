@@ -4,6 +4,7 @@ import com.github.arteam.jdit.DBIRunner;
 import com.github.arteam.jdit.annotations.DBIHandle;
 import com.github.arteam.jdit.annotations.DataSet;
 import com.github.arteam.jdit.annotations.TestedSqlObject;
+import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import org.joda.time.format.ISODateTimeFormat;
 import org.junit.Test;
@@ -16,6 +17,7 @@ import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Date: 2/14/15
@@ -24,6 +26,7 @@ import static org.junit.Assert.assertFalse;
  * @author Artem Prigoda
  */
 @RunWith(DBIRunner.class)
+@DataSet("playerDao/players.sql")
 public class PlayerDaoTest {
 
     @TestedSqlObject
@@ -39,7 +42,7 @@ public class PlayerDaoTest {
         assertFalse(rows.isEmpty());
 
         Map<String, Object> row = rows.get(0);
-        assertEquals(0, row.get("id"));
+        assertEquals(4, row.get("id"));
         assertEquals("Vladimir", row.get("first_name"));
         assertEquals("Tarasenko", row.get("last_name"));
         assertEquals(date("1991-12-13"), row.get("birth_date"));
@@ -48,13 +51,30 @@ public class PlayerDaoTest {
     }
 
     @Test
-    @DataSet("playerDao/players.sql")
     public void testGetPlayerListNames() {
         List<String> playerLastNames = playerDao.getPlayerLastNames();
         assertEquals(playerLastNames, ImmutableList.of("Ellis", "Seguin", "Tarasenko", "Tavares"));
     }
 
+    @Test
+    public void testGetAmountPlayersBornInYear() {
+        int amount = playerDao.getAmountPlayersBornInYear(1991);
+        assertEquals(amount, 2);
+    }
 
+    @Test
+    public void testSuccessfulPlayerSearch(){
+        Optional<Player> player = playerDao.findPlayer("Ryan", "Ellis");
+        assertTrue(player.isPresent());
+        assertEquals(player.get().firstName, "Ryan");
+        assertEquals(player.get().lastName, "Ellis");
+    }
+
+    @Test
+    public void testUnsuccessfulPlayerSearch(){
+        Optional<Player> player = playerDao.findPlayer("Jake", "Johnson");
+        assertFalse(player.isPresent());
+    }
 
     private static Date date(String textDate) {
         return ISODateTimeFormat.date().parseDateTime(textDate).toDate();

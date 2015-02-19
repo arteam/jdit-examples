@@ -5,6 +5,7 @@ import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
+import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
 import org.skife.jdbi.v2.sqlobject.customizers.SingleValueResult;
 
 import java.util.Date;
@@ -33,8 +34,9 @@ public interface PlayerDao {
     int getAmountPlayersBornInYear(@Bind("year") int year);
 
     @SqlQuery("select * from players where first_name=:first_name and " +
-              "last_name=:last_name")
+            "last_name=:last_name")
     @SingleValueResult
+    @Mapper(PlayerMapper.class)
     Optional<Player> findPlayer(@Bind("first_name") String firstName,
                                 @Bind("last_name") String lastName);
 }
