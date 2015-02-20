@@ -1,4 +1,4 @@
-package jdbi.testing;
+package testing;
 
 import com.github.arteam.jdit.DBIRunner;
 import com.github.arteam.jdit.annotations.DBIHandle;
@@ -6,6 +6,8 @@ import com.github.arteam.jdit.annotations.DataSet;
 import com.github.arteam.jdit.annotations.TestedSqlObject;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
+import jdbi.testing.Player;
+import jdbi.testing.PlayerDao;
 import org.joda.time.format.ISODateTimeFormat;
 import org.junit.Test;
 import org.junit.runner.RunWith;

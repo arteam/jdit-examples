@@ -6,6 +6,7 @@
 
     <groupId>jdbi-testing-examples</groupId>
     <artifactId>jdbi-testing-examples</artifactId>
+    <packaging>pom</packaging>
     <version>1.0</version>
 
     <build>
@@ -15,6 +16,10 @@
             </testResource>
         </testResources>
     </build>
+    <modules>
+        <module>basic</module>
+        <module>dbidao</module>
+    </modules>
 
     <dependencies>
         <dependency>
