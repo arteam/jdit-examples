@@ -17,7 +17,7 @@
         </testResources>
     </build>
     <modules>
-        <module>basic</module>
+        <module>sqlobject</module>
         <module>dbidao</module>
     </modules>
 
