@@ -31,7 +31,8 @@
     <modules>
         <module>sqlobject</module>
         <module>dbidao</module>
-        <module>custom-db-name</module>
+        <module>custom-db</module>
+        <module>custom-schema</module>
     </modules>
 
     <dependencies>
