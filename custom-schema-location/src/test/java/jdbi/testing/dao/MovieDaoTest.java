@@ -31,4 +31,18 @@ public class MovieDaoTest {
         }
         Assert.assertEquals(movies.size(), 3);
     }
+
+    @Test
+    @DataSet("movieDao/insert-actors.sql")
+    public void testGetActors() {
+        List<Actor> actors = movieDao.getActors(Country.GB);
+        for (Actor actor : actors) {
+            System.out.println(actor);
+        }
+        Assert.assertEquals(actors.size(), 2);
+        Assert.assertEquals(actors.get(0).gender, Gender.FEMALE);
+        Assert.assertEquals(actors.get(0).firstName, "Kaya");
+        Assert.assertEquals(actors.get(0).lastName, "Scodelario");
+        Assert.assertEquals(actors.get(0).nationality.code, Country.GB.code);
+    }
 }

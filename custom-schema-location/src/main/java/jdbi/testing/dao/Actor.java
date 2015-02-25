@@ -1,5 +1,6 @@
 package jdbi.testing.dao;
 
+import com.google.common.base.MoreObjects;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
 
@@ -26,6 +27,17 @@ public class Actor {
         this.lastName = lastName;
         this.gender = gender;
         this.nationality = nationality;
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("id", id)
+                .add("firstName", firstName)
+                .add("lastName", lastName)
+                .add("gender", gender)
+                .add("nationality", nationality)
+                .toString();
     }
 
     public static class ActorMapper implements ResultSetMapper<Actor> {
