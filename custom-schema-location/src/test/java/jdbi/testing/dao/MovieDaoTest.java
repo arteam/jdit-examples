@@ -33,7 +33,7 @@ public class MovieDaoTest {
     }
 
     @Test
-    @DataSet("movieDao/insert-actors.sql")
+    @DataSet({"movieDao/insert-countries.sql", "movieDao/insert-actors.sql"})
     public void testGetActors() {
         List<Actor> actors = movieDao.getActors(Country.GB);
         for (Actor actor : actors) {

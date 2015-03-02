@@ -1,6 +1,3 @@
-insert into countries(alpha2_code, name) values
-('GB', 'Great Britain'), ('US', 'United Stated'), ('RU', 'Russia');
-
 insert into actors(first_name, last_name, gender, nationality) values
 ('Bob', 'Murray', 'male', 'US'),
 ('Jennifer', 'Connely', 'female', 'US'),
