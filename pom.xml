@@ -45,6 +45,7 @@
         <module>dbidao</module>
         <module>custom-db</module>
         <module>custom-schema-location</module>
+        <module>custom-dbi-factory</module>
     </modules>
 
     <dependencies>
