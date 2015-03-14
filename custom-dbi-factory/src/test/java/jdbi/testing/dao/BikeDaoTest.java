@@ -22,9 +22,11 @@ public class BikeDaoTest {
     BikeDao bikeDao;
 
     @Test
-    @DataSet({"bikeDao/types.sql", "bikeDao/manufacturers.sql"})
+    @DataSet({"bikeDao/types.sql", "bikeDao/manufacturers.sql", "bikeDao/bikes.sql"})
     public void testGetBikes() throws Exception {
         List<Bike> bikes = bikeDao.getBikes();
-        System.out.println(bikes);
+        for (Bike bike : bikes) {
+            System.out.println(bike);
+        }
     }
 }

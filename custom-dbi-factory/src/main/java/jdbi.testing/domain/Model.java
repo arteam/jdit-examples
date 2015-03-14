@@ -1,5 +1,8 @@
 package jdbi.testing.domain;
 
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
+
 /**
  * Date: 3/13/15
  * Time: 8:34 AM
@@ -20,5 +23,16 @@ public class Model {
         this.name = name;
         this.year = year;
         this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("id", id)
+                .add("manufacturer", manufacturer)
+                .add("name", name)
+                .add("year", year)
+                .add("type", type)
+                .toString();
     }
 }

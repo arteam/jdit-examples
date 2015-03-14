@@ -1,5 +1,8 @@
 package jdbi.testing.domain;
 
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
+
 import java.util.List;
 
 /**
@@ -20,5 +23,15 @@ public class Bike {
         this.model = model;
         this.size = size;
         this.colours = colours;
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("id", id)
+                .add("model", model)
+                .add("size", size)
+                .add("colours", colours)
+                .toString();
     }
 }

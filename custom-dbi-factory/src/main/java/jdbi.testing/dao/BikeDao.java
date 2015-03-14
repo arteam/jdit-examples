@@ -25,7 +25,7 @@ public abstract class BikeDao {
 
     @SqlQuery("select b.id, b.size," +
             " m.id model_id, mf.name manufacturer_name, m.name model_name, m.year, m.type_name," +
-            " array (select name from bike_colors bc where bc.bike_id=b.id) colors" +
+            " array (select bc.color from bike_colors bc where bc.bike_id=b.id) colors" +
             " from bikes b" +
             " inner join models m on b.model_id=m.id" +
             " inner join manufacturers mf on mf.id=m.manufacturer_id")
@@ -45,7 +45,7 @@ public abstract class BikeDao {
             List<String> colors = FluentIterable.of((Object[]) r.getArray("colors").getArray())
                     .transform(Functions.toStringFunction())
                     .toList();
-            Model model = new Model(modelId, manufacturerName, modelName, year, Type.valueOf(type));
+            Model model = new Model(modelId, manufacturerName, modelName, year, Type.valueOf(type.toUpperCase()));
             return new Bike(id, model, size, colors);
         }
     }
