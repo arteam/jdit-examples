@@ -5,7 +5,7 @@ create table models (
   id              bigint primary key,
   name            varchar(64) not null,
   manufacturer_id bigint      not null,
-  type_name       bigint      not null,
+  type_name       varchar(16) not null,
   year            int         null,
   foreign key (manufacturer_id) references manufacturers (id),
   foreign key (type_name) references types (name),
