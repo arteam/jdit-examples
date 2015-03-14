@@ -12,14 +12,12 @@ public class Bike {
 
     public long id;
     public Model model;
-    public Type type;
     public int size;
     public List<String> colours;
 
-    public Bike(long id, Model model, Type type, int size, List<String> colours) {
+    public Bike(long id, Model model, int size, List<String> colours) {
         this.id = id;
         this.model = model;
-        this.type = type;
         this.size = size;
         this.colours = colours;
     }
