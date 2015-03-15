@@ -2,6 +2,7 @@ package jdbi.testing.dao;
 
 import com.github.arteam.jdit.DBIRunner;
 import com.github.arteam.jdit.annotations.DataSet;
+import com.github.arteam.jdit.annotations.TestedDao;
 import com.github.arteam.jdit.annotations.TestedSqlObject;
 import jdbi.testing.domain.Bike;
 import org.junit.Test;
@@ -18,7 +19,7 @@ import java.util.List;
 @RunWith(DBIRunner.class)
 public class BikeDaoTest {
 
-    @TestedSqlObject
+    @TestedDao
     BikeDao bikeDao;
 
     @Test
