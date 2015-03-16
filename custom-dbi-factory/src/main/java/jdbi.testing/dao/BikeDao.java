@@ -1,9 +1,11 @@
 package jdbi.testing.dao;
 
+import com.google.common.collect.Maps;
 import jdbi.testing.domain.Bike;
 import jdbi.testing.domain.Model;
 import jdbi.testing.domain.Type;
 import org.skife.jdbi.v2.DBI;
+import org.skife.jdbi.v2.Folder2;
 import org.skife.jdbi.v2.Handle;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
@@ -11,7 +13,9 @@ import org.skife.jdbi.v2.util.StringMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * date: 3/14/15
@@ -40,6 +44,28 @@ public class BikeDao {
                             return createBike(r);
                         }
                     }).list();
+        }
+    }
+
+    public Map<Type, String> getTopColors(){
+        try (Handle handle = dbi.open()){
+           return handle.createQuery(
+                   "select t.name, top_color.* from types t " +
+                   "lateral (select bc.color, cnt from models m " +
+                           "inner join bikes b on b.model_id=m.id " +
+                           "inner join bike_colors bc on bc.bike_id=b.id " +
+                           "where m.type_name=t.name " +
+                           "group by m.type_name, bc.color " +
+                           "order by cnt desc " +
+                           "limit 1) as top_color")
+                   .fold(new HashMap<Type, String>(), new Folder2<HashMap<Type, String>>() {
+                       @Override
+                       public HashMap<Type, String> fold(HashMap<Type, String> accumulator, ResultSet rs, StatementContext ctx) throws SQLException {
+                           System.out.println(Type.valueOf(rs.getString("type_name").toUpperCase()) + " " + rs.getString("color") + " " + rs.getInt("cnt"));
+                           accumulator.put(Type.valueOf(rs.getString("type_name").toUpperCase()), rs.getString("color"));
+                           return accumulator;
+                       }
+                   });
         }
     }
 
