@@ -4,6 +4,7 @@ import com.github.arteam.jdit.DBIRunner;
 import com.github.arteam.jdit.annotations.DataSet;
 import com.github.arteam.jdit.annotations.TestedDao;
 import com.github.arteam.jdit.annotations.TestedSqlObject;
+import com.google.common.collect.ImmutableMap;
 import jdbi.testing.domain.Bike;
 import jdbi.testing.domain.Type;
 import org.junit.Assert;
@@ -42,5 +43,7 @@ public class BikeDaoTest {
         for (Map.Entry<Type, String> entry : topColors.entrySet()) {
             System.out.println(entry.getKey() + ":" + entry.getValue());
         }
+        Assert.assertEquals(topColors, ImmutableMap.of(Type.CROSS, "red", Type.CROSS_COUNTRY, "yellow",
+                Type.ROAD, "blue"));
     }
 }

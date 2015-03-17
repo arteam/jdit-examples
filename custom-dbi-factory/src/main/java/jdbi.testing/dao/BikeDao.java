@@ -14,6 +14,7 @@ import org.skife.jdbi.v2.util.StringMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,25 +48,26 @@ public class BikeDao {
         }
     }
 
-    public Map<Type, String> getTopColors(){
-        try (Handle handle = dbi.open()){
-           return handle.createQuery(
-                   "select t.name, top_color.* from types t " +
-                   "lateral (select bc.color, cnt from models m " +
-                           "inner join bikes b on b.model_id=m.id " +
-                           "inner join bike_colors bc on bc.bike_id=b.id " +
-                           "where m.type_name=t.name " +
-                           "group by m.type_name, bc.color " +
-                           "order by cnt desc " +
-                           "limit 1) as top_color")
-                   .fold(new HashMap<Type, String>(), new Folder2<HashMap<Type, String>>() {
-                       @Override
-                       public HashMap<Type, String> fold(HashMap<Type, String> accumulator, ResultSet rs, StatementContext ctx) throws SQLException {
-                           System.out.println(Type.valueOf(rs.getString("type_name").toUpperCase()) + " " + rs.getString("color") + " " + rs.getInt("cnt"));
-                           accumulator.put(Type.valueOf(rs.getString("type_name").toUpperCase()), rs.getString("color"));
-                           return accumulator;
-                       }
-                   });
+    public Map<Type, String> getTopColors() {
+        try (Handle handle = dbi.open()) {
+            return handle.createQuery("with top_colors as " +
+                    "(select  m.type_name, bc.color, count(*) cnt " +
+                    " from models m " +
+                    " inner join bikes b on b.model_id = m.id " +
+                    " inner join bike_colors bc on bc.bike_id = b.id " +
+                    " group by m.type_name, bc.color " +
+                    " order by m.type_name) " +
+                    "select tc1.* from top_colors tc1 " +
+                    "where not exists(select * from top_colors tc2 " +
+                    " where tc1.type_name=tc2.type_name " +
+                    " and (tc1.cnt<tc2.cnt or (tc1.cnt = tc2.cnt and tc1.color > tc2.color)) " +
+                    ")").fold(new LinkedHashMap<Type, String>(), new Folder2<Map<Type, String>>() {
+                @Override
+                public Map<Type, String> fold(Map<Type, String> accumulator, ResultSet rs, StatementContext ctx) throws SQLException {
+                    accumulator.put(Type.valueOf(rs.getString("type_name").toUpperCase()), rs.getString("color"));
+                    return accumulator;
+                }
+            });
         }
     }
 
