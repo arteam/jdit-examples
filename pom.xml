@@ -46,6 +46,7 @@
         <module>custom-db</module>
         <module>custom-schema-location</module>
         <module>custom-dbi-factory</module>
+        <module>immutables</module>
     </modules>
 
     <dependencies>
@@ -70,6 +71,9 @@
             <releases>
                 <enabled>true</enabled>
             </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
         </repository>
     </repositories>
     
