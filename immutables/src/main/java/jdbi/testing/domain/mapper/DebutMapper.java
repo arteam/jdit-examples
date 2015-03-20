@@ -1,6 +1,6 @@
 package jdbi.testing.domain.mapper;
 
-import jdbi.testing.ImmutableDebut;
+import jdbi.testing.domain.ImmutableDebut;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
 

@@ -1,7 +1,7 @@
 package jdbi.testing.dao;
 
 import com.google.common.collect.ImmutableList;
-import jdbi.testing.ImmutableChessGame;
+import jdbi.testing.domain.ImmutableChessGame;
 import jdbi.testing.domain.ChessGame;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 

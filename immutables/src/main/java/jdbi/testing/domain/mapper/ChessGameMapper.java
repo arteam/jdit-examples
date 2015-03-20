@@ -1,6 +1,6 @@
 package jdbi.testing.domain.mapper;
 
-import jdbi.testing.ImmutableChessGame;
+import jdbi.testing.domain.ImmutableChessGame;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
 
