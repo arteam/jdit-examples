@@ -1,4 +1,4 @@
-insert into ranks (name) values (grandmaster),
+insert into ranks (name) values
 ('grandmaster'),
 ('master'),
 ('candidate_to_master'),

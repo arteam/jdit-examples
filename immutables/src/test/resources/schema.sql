@@ -1,5 +1,5 @@
 create table ranks(
-  name varchar(32) not null
+  name varchar(32) not null primary key
 );
 
 create table chess_players(
@@ -17,7 +17,7 @@ create table debuts(
 
 create table results(
   id int primary key,
-  name varchar (8)
+  name varchar (16) not null
 );
 
 create table chess_games(
