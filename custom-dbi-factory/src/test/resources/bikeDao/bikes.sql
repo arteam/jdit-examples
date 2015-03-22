@@ -44,3 +44,4 @@ insert into bike_colors(bike_id, color) values
 (12, 'grey'),
 (13, 'silver'),
 (14, 'golden');
+

@@ -6,3 +6,4 @@ create table cities(
   country_code varchar(2) not null,
   unique (name, region_code, country_code)
 );
+

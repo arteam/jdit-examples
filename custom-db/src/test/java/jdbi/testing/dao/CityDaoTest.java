@@ -42,3 +42,4 @@ public class CityDaoTest {
         Assert.assertEquals(city.countryCode, "US");
     }
 }
+

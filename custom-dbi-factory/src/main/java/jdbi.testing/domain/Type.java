@@ -9,3 +9,4 @@ package jdbi.testing.domain;
 public enum Type {
     CROSS_COUNTRY, TOURING, ROAD, CROSS, JUNIOR
 }
+

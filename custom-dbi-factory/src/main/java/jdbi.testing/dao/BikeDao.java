@@ -93,3 +93,4 @@ public class BikeDao {
         return new Bike(id, model, size, getBikeColors(id));
     }
 }
+

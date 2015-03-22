@@ -24,3 +24,4 @@ public interface CityDao {
     @SqlQuery("select id, name, country_code, region_code from cities where id=:city_id")
     City getCity(@Bind("city_id") long cityId);
 }
+

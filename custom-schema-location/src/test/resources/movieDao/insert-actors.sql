@@ -5,3 +5,4 @@ insert into actors(first_name, last_name, gender, nationality) values
 ('Kaya', 'Scodelario', 'female', 'GB'),
 ('Svetlana', 'Khodchenkova', 'female', 'RU'),
 ('Vladimir', 'Mashkov', 'male', 'RU');
+

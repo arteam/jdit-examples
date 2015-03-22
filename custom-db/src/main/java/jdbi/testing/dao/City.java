@@ -20,3 +20,4 @@ public class City {
         this.countryCode = countryCode;
     }
 }
+

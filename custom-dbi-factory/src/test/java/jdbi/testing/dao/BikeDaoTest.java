@@ -47,3 +47,4 @@ public class BikeDaoTest {
                 Type.ROAD, "blue"));
     }
 }
+

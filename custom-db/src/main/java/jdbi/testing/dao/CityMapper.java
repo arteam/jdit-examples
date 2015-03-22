@@ -19,3 +19,4 @@ public class CityMapper implements ResultSetMapper<City> {
                 r.getString("country_code"));
     }
 }
+
