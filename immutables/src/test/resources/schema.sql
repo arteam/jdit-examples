@@ -25,8 +25,10 @@ create table chess_games(
   white_player_id int not null,
   black_player_id int not null,
   result_id int not null,
+  debut_code varchar(8)  not null,
   foreign key (white_player_id) references chess_players(id),
   foreign key (black_player_id) references chess_players(id),
   foreign key (result_id) references results(id),
+  foreign key (debut_code) references debuts(code),
   check (white_player_id != black_player_id)
 )

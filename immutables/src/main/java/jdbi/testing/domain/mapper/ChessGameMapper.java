@@ -1,6 +1,7 @@
 package jdbi.testing.domain.mapper;
 
 import jdbi.testing.domain.ImmutableChessGame;
+import jdbi.testing.domain.Result;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
 
@@ -24,6 +25,7 @@ public class ChessGameMapper implements ResultSetMapper<ImmutableChessGame> {
                 .white(chessPlayerMapper.map("white_", r))
                 .black(chessPlayerMapper.map("black_", r))
                 .debut(debutMapper.map(index, r, ctx))
+                .result(Result.valueOf(r.getString("result_name").toUpperCase()))
                 .build();
     }
 }
