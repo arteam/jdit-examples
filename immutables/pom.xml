@@ -15,14 +15,7 @@
         <dependency>
             <groupId>org.immutables</groupId>
             <artifactId>value</artifactId>
-            <version>1.0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.immutables</groupId>
-            <artifactId>value-standalone</artifactId>
-            <version>1.0.1</version>
-            <scope>provided</scope>
-            <optional>true</optional>
+            <version>2.0</version>
         </dependency>
 
     </dependencies>
