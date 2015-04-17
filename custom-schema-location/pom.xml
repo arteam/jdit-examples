@@ -10,12 +10,4 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>custom-schema-location</artifactId>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.jdbi</groupId>
-            <artifactId>jdbi</artifactId>
-            <version>2.59</version>
-        </dependency>
-    </dependencies>
 </project>
