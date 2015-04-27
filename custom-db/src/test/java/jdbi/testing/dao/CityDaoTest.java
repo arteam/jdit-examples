@@ -25,7 +25,7 @@ public class CityDaoTest {
 
     @Test
     public void testAddCity() throws Exception {
-        long cityId = cityDao.addCity("US", "MO", "St. Louis");
+        long cityId = cityDao.addCity("US", "MO", "St. Louis", new double[]{38.6272222,  -90.1977778});
         Assert.assertEquals(cityId, 1L);
     }
 

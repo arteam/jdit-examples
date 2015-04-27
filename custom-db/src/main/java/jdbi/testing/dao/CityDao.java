@@ -15,13 +15,13 @@ import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 @RegisterMapper(CityMapper.class)
 public interface CityDao {
 
-    @SqlUpdate("insert into cities(country_code, region_code, name) " +
-            "values (:country_code, :region_code, :name)")
+    @SqlUpdate("insert into cities(country_code, region_code, name, location) " +
+            "values (:country_code, :region_code, :name, :location)")
     @GetGeneratedKeys
     long addCity(@Bind("country_code") String countryCode, @Bind("region_code") String regionCode,
-                 @Bind("name") String name);
+                 @Bind("name") String name, @Bind("location") double[] location);
 
-    @SqlQuery("select id, name, country_code, region_code from cities where id=:city_id")
+    @SqlQuery("select id, name, country_code, region_code, location from cities where id=:city_id")
     City getCity(@Bind("city_id") long cityId);
 }
 
