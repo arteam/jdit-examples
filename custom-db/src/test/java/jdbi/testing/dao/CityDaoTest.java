@@ -8,6 +8,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.skife.jdbi.v2.Handle;
 
+import java.util.Arrays;
+
 /**
  * Date: 2/22/15
  * Time: 3:10 PM
@@ -25,14 +27,15 @@ public class CityDaoTest {
 
     @Test
     public void testAddCity() throws Exception {
-        long cityId = cityDao.addCity("US", "MO", "St. Louis", new double[]{38.6272222,  -90.1977778});
+        long cityId = cityDao.addCity("US", "MO", "St. Louis", new Double[]{38.6272222,  -90.1977778});
         Assert.assertEquals(cityId, 1L);
     }
 
     @Test
     public void testGetCityNameById() {
         long cityId = 42L;
-        handle.insert("insert into cities(id,country_code, region_code, name) values (?,?,?,?)",
+        handle.insert("insert into cities(id,country_code, region_code, name, location) values (?,?,?,?, " +
+                        "array[38.6272222, -90.1977778])",
                 cityId, "US", "MO", "St. Louis");
 
         City city = cityDao.getCity(cityId);
@@ -40,6 +43,7 @@ public class CityDaoTest {
         Assert.assertEquals(city.name, "St. Louis");
         Assert.assertEquals(city.regionCode, "MO");
         Assert.assertEquals(city.countryCode, "US");
+        Assert.assertArrayEquals(city.location, new Double[]{38.6272222, -90.1977778});
     }
 }
 

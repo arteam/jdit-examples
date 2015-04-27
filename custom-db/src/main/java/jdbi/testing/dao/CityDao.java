@@ -4,6 +4,7 @@ import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
+import org.skife.jdbi.v2.sqlobject.customizers.RegisterArgumentFactory;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 
 /**
@@ -13,13 +14,14 @@ import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
  * @author Artem Prigoda
  */
 @RegisterMapper(CityMapper.class)
+@RegisterArgumentFactory(DoubleArrayArgumentFactory.class)
 public interface CityDao {
 
     @SqlUpdate("insert into cities(country_code, region_code, name, location) " +
             "values (:country_code, :region_code, :name, :location)")
     @GetGeneratedKeys
     long addCity(@Bind("country_code") String countryCode, @Bind("region_code") String regionCode,
-                 @Bind("name") String name, @Bind("location") double[] location);
+                 @Bind("name") String name, @Bind("location") Double[] location);
 
     @SqlQuery("select id, name, country_code, region_code, location from cities where id=:city_id")
     City getCity(@Bind("city_id") long cityId);

@@ -3,8 +3,10 @@ package jdbi.testing.dao;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
 
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 /**
  * Date: 2/22/15
@@ -15,8 +17,13 @@ import java.sql.SQLException;
 public class CityMapper implements ResultSetMapper<City> {
     @Override
     public City map(int index, ResultSet r, StatementContext ctx) throws SQLException {
+        Object[] locationArray = (Object[]) r.getArray("location").getArray();
+        Double[] location = new Double[locationArray.length];
+        for (int i = 0; i < locationArray.length; i++) {
+            location[i] = (Double) locationArray[i];
+        }
         return new City(r.getLong("id"), r.getString("name"), r.getString("region_code"),
-                r.getString("country_code"), (double[]) r.getArray("location").getArray());
+                r.getString("country_code"), location);
     }
 }
 
