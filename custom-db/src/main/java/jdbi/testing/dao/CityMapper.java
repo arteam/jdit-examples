@@ -18,9 +18,9 @@ public class CityMapper implements ResultSetMapper<City> {
     @Override
     public City map(int index, ResultSet r, StatementContext ctx) throws SQLException {
         Object[] locationArray = (Object[]) r.getArray("location").getArray();
-        Double[] location = new Double[locationArray.length];
+        double[] location = new double[locationArray.length];
         for (int i = 0; i < locationArray.length; i++) {
-            location[i] = (Double) locationArray[i];
+            location[i] = (double) locationArray[i];
         }
         return new City(r.getLong("id"), r.getString("name"), r.getString("region_code"),
                 r.getString("country_code"), location);

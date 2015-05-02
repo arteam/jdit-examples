@@ -21,7 +21,7 @@ public interface CityDao {
             "values (:country_code, :region_code, :name, :location)")
     @GetGeneratedKeys
     long addCity(@Bind("country_code") String countryCode, @Bind("region_code") String regionCode,
-                 @Bind("name") String name, @Bind("location") Double[] location);
+                 @Bind("name") String name, @Bind("location") double[] location);
 
     @SqlQuery("select id, name, country_code, region_code, location from cities where id=:city_id")
     City getCity(@Bind("city_id") long cityId);

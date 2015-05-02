@@ -12,9 +12,9 @@ public class City {
     public final String name;
     public final String regionCode;
     public final String countryCode;
-    public final Double[] location;
+    public final double[] location;
 
-    public City(long id, String name, String regionCode, String countryCode, Double[] location) {
+    public City(long id, String name, String regionCode, String countryCode, double[] location) {
         this.id = id;
         this.name = name;
         this.regionCode = regionCode;

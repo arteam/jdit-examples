@@ -14,20 +14,24 @@ import java.sql.Types;
  *
  * @author Artem Prigoda
  */
-public class DoubleArrayArgumentFactory implements ArgumentFactory<Double[]> {
+public class DoubleArrayArgumentFactory implements ArgumentFactory<double[]> {
 
     @Override
     public boolean accepts(Class<?> expectedType, Object value, StatementContext ctx) {
-        return value.getClass() == Double[].class;
+        return value.getClass() == double[].class;
     }
 
     @Override
-    public Argument build(Class<?> expectedType, final Double[] value, StatementContext ctx) {
+    public Argument build(Class<?> expectedType, final double[] value, StatementContext ctx) {
         return new Argument() {
             @Override
             public void apply(int position, PreparedStatement statement, StatementContext ctx) throws SQLException {
                 if (value != null) {
-                    statement.setArray(position, ctx.getConnection().createArrayOf("NUMERIC", value));
+                    Object[] wrappedValue = new Object[value.length];
+                    for (int i = 0; i < value.length; i++) {
+                        wrappedValue[i] = value[i];
+                    }
+                    statement.setArray(position, ctx.getConnection().createArrayOf("NUMERIC", wrappedValue));
                 } else {
                     statement.setNull(position, Types.ARRAY);
                 }
