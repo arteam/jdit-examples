@@ -11,6 +11,9 @@ import org.immutables.value.Value;
 @Value.Immutable
 public abstract class Debut {
 
+    @Value.Parameter
     public abstract String code();
+
+    @Value.Parameter
     public abstract String name();
 }

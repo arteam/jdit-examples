@@ -11,9 +11,12 @@ import org.immutables.value.Value;
 @Value.Immutable
 public abstract class ChessPlayer {
 
+    @Value.Parameter
     public abstract String firstName();
 
+    @Value.Parameter
     public abstract String lastName();
 
+    @Value.Parameter
     public abstract Rank rank();
 }

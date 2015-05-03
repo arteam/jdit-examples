@@ -11,11 +11,15 @@ import org.immutables.value.Value;
 @Value.Immutable
 public abstract class ChessGame {
 
+    @Value.Parameter
     public abstract ChessPlayer white();
 
+    @Value.Parameter
     public abstract ChessPlayer black();
 
+    @Value.Parameter
     public abstract Result result();
 
+    @Value.Parameter
     public abstract Debut debut();
 }
