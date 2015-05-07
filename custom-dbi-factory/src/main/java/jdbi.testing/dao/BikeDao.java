@@ -46,13 +46,14 @@ public class BikeDao {
 
     public Map<Type, String> getTopColors() {
         try (Handle handle = dbi.open()) {
-            return handle.createQuery("bikeDao/get-top-colors.sql").fold(new LinkedHashMap<Type, String>(), new Folder2<Map<Type, String>>() {
-                @Override
-                public Map<Type, String> fold(Map<Type, String> a, ResultSet rs, StatementContext ctx) throws SQLException {
-                    a.put(Type.valueOf(rs.getString("type_name").toUpperCase()), rs.getString("color"));
-                    return a;
-                }
-            });
+            return handle.createQuery("bikeDao/get-top-colors.sql")
+                    .fold(new LinkedHashMap<Type, String>(), new Folder2<Map<Type, String>>() {
+                        @Override
+                        public Map<Type, String> fold(Map<Type, String> a, ResultSet rs, StatementContext ctx) throws SQLException {
+                            a.put(Type.valueOf(rs.getString("type_name").toUpperCase()), rs.getString("color"));
+                            return a;
+                        }
+                    });
         }
     }
 

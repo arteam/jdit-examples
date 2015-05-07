@@ -13,10 +13,10 @@ import java.util.List;
  */
 public class Bike {
 
-    public long id;
-    public Model model;
-    public int size;
-    public List<String> colours;
+    public final long id;
+    public final Model model;
+    public final int size;
+    public final List<String> colours;
 
     public Bike(long id, Model model, int size, List<String> colours) {
         this.id = id;
