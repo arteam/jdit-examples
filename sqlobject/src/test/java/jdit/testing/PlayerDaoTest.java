@@ -1,4 +1,4 @@
-package testing;
+package jdit.testing;
 
 import com.github.arteam.jdit.DBIRunner;
 import com.github.arteam.jdit.annotations.DBIHandle;
