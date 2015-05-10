@@ -1,6 +1,11 @@
 package jdit.testing.domain;
 
 import com.google.common.base.MoreObjects;
+import org.skife.jdbi.v2.StatementContext;
+import org.skife.jdbi.v2.tweak.ResultSetMapper;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Date: 2/23/15
@@ -30,5 +35,13 @@ public class Movie {
                 .add("year", year)
                 .add("director", director)
                 .toString();
+    }
+
+    public static class MovieMapper implements ResultSetMapper<Movie> {
+
+        @Override
+        public Movie map(int index, ResultSet r, StatementContext ctx) throws SQLException {
+            return new Movie(r.getLong("id"), r.getString("name"), r.getInt("year"), r.getString("director"));
+        }
     }
 }

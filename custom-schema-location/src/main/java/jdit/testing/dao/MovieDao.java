@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author Artem Prigoda
  */
-@RegisterMapper({MovieMapper.class, Actor.ActorMapper.class})
+@RegisterMapper({Movie.MovieMapper.class, Actor.ActorMapper.class})
 public interface MovieDao {
 
     @SqlQuery("select id, name, year, director from movies where year=:year")
