@@ -18,9 +18,9 @@ public interface ChessDao {
 
     @SqlQuery("chessDao/get-chess-games.sql")
     @Mapper(ChessGameMapper.class)
-    public ImmutableList<ImmutableChessGame> getChessGames();
+    ImmutableList<ImmutableChessGame> getChessGames();
 
     @SqlQuery("chessDao/get-chess-players.sql")
     @Mapper(ChessPlayerMapper.class)
-    public ImmutableList<ImmutableChessPlayer> getChessPlayers();
+    ImmutableList<ImmutableChessPlayer> getChessPlayers();
 }
