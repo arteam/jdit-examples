@@ -25,24 +25,28 @@ public class TeamDao {
         return dbi.inTransaction(new TransactionCallback<Long>() {
             @Override
             public Long inTransaction(Handle h, TransactionStatus status) throws Exception {
-                Long teamId = h.createStatement("insert into teams(name, division) values (:name, :division)")
-                        .bind("name", name)
-                        .bind("division", division.name())
-                        .executeAndReturnGeneratedKeys(LongMapper.FIRST)
-                        .first();
-                for (Player player : players) {
-                    Long playerId = h.createStatement(
-                            "insert into players(first_name, last_name, number, position) values (?,?,?,?)")
-                            .bind(0, player.firstName)
-                            .bind(1, player.lastName)
-                            .bind(2, player.number)
-                            .bind(3, player.position.code)
-                            .executeAndReturnGeneratedKeys(LongMapper.FIRST)
-                            .first();
-                    h.insert("insert into roster(team_id, player_id) values (?,?)", teamId, playerId);
-                }
-                return teamId;
+                return addTeam0(h, name, division, players);
             }
         });
+    }
+
+    private Long addTeam0(Handle h, String name, Division division, List<Player> players) {
+        Long teamId = h.createStatement("insert into teams(name, division) values (:name, :division)")
+                .bind("name", name)
+                .bind("division", division.name())
+                .executeAndReturnGeneratedKeys(LongMapper.FIRST)
+                .first();
+        for (Player player : players) {
+            Long playerId = h.createStatement(
+                    "insert into players(first_name, last_name, number, position) values (?,?,?,?)")
+                    .bind(0, player.firstName)
+                    .bind(1, player.lastName)
+                    .bind(2, player.number)
+                    .bind(3, player.position.code)
+                    .executeAndReturnGeneratedKeys(LongMapper.FIRST)
+                    .first();
+            h.insert("insert into roster(team_id, player_id) values (?,?)", teamId, playerId);
+        }
+        return teamId;
     }
 }
