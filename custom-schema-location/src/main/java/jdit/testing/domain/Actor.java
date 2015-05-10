@@ -1,4 +1,4 @@
-package jdit.testing.dao;
+package jdit.testing.domain;
 
 import com.google.common.base.MoreObjects;
 import org.skife.jdbi.v2.StatementContext;

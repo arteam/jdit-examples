@@ -1,4 +1,4 @@
-package jdit.testing.dao;
+package jdit.testing.domain;
 
 import org.skife.jdbi.v2.sqlobject.BindingAnnotation;
 

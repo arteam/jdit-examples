@@ -1,5 +1,6 @@
 package jdit.testing.dao;
 
+import jdit.testing.domain.*;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
@@ -16,8 +17,8 @@ import java.util.List;
 public interface MovieDao {
 
     @SqlQuery("select id, name, year, director from movies where year=:year")
-    public List<Movie> getMovies(@Bind("year") int year);
+    List<Movie> getMovies(@Bind("year") int year);
 
     @SqlQuery("movieDao/get-actors.sql")
-    public List<Actor> getActors(@BindCountry Country country);
+    List<Actor> getActors(@BindCountry Country country);
 }

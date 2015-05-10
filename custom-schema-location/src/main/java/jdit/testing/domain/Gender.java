@@ -1,4 +1,4 @@
-package jdit.testing.dao;
+package jdit.testing.domain;
 
 /**
  * Date: 2/25/15
