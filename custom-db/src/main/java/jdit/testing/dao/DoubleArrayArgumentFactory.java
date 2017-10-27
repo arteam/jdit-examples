@@ -1,8 +1,9 @@
 package jdit.testing.dao;
 
-import org.skife.jdbi.v2.StatementContext;
-import org.skife.jdbi.v2.tweak.Argument;
-import org.skife.jdbi.v2.tweak.ArgumentFactory;
+import org.jdbi.v3.core.argument.AbstractArgumentFactory;
+import org.jdbi.v3.core.argument.Argument;
+import org.jdbi.v3.core.config.ConfigRegistry;
+import org.jdbi.v3.core.statement.StatementContext;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -14,15 +15,14 @@ import java.sql.Types;
  *
  * @author Artem Prigoda
  */
-public class DoubleArrayArgumentFactory implements ArgumentFactory<double[]> {
+public class DoubleArrayArgumentFactory extends AbstractArgumentFactory<double[]> {
 
-    @Override
-    public boolean accepts(Class<?> expectedType, Object value, StatementContext ctx) {
-        return value.getClass() == double[].class;
+    public DoubleArrayArgumentFactory() {
+        super(Types.ARRAY);
     }
 
     @Override
-    public Argument build(Class<?> expectedType, final double[] value, StatementContext ctx) {
+    protected Argument build(double[] value, ConfigRegistry config) {
         return new Argument() {
             @Override
             public void apply(int position, PreparedStatement statement, StatementContext ctx) throws SQLException {

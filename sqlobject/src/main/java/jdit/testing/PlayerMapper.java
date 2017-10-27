@@ -1,7 +1,7 @@
 package jdit.testing;
 
-import org.skife.jdbi.v2.StatementContext;
-import org.skife.jdbi.v2.tweak.ResultSetMapper;
+import org.jdbi.v3.core.mapper.RowMapper;
+import org.jdbi.v3.core.statement.StatementContext;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,11 +12,12 @@ import java.sql.SQLException;
  *
  * @author Artem Prigoda
  */
-public class PlayerMapper implements ResultSetMapper<Player> {
+public class PlayerMapper implements RowMapper<Player> {
 
     @Override
-    public Player map(int index, ResultSet r, StatementContext ctx) throws SQLException {
+    public Player map(ResultSet r, StatementContext ctx) throws SQLException {
         return new Player(r.getLong("id"), r.getString("first_name"), r.getString("last_name"),
                 r.getTimestamp("birth_date"), r.getInt("height"), r.getInt("weight"));
+
     }
 }

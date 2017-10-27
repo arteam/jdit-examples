@@ -1,7 +1,7 @@
 package jdit.testing.dao;
 
-import org.skife.jdbi.v2.StatementContext;
-import org.skife.jdbi.v2.tweak.ResultSetMapper;
+import org.jdbi.v3.core.mapper.RowMapper;
+import org.jdbi.v3.core.statement.StatementContext;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,9 +12,10 @@ import java.sql.SQLException;
  *
  * @author Artem Prigoda
  */
-public class CityMapper implements ResultSetMapper<City> {
+public class CityMapper implements RowMapper<City> {
+
     @Override
-    public City map(int index, ResultSet r, StatementContext ctx) throws SQLException {
+    public City map(ResultSet r, StatementContext statementContext) throws SQLException {
         Object[] locationArray = (Object[]) r.getArray("location").getArray();
         double[] location = new double[locationArray.length];
         for (int i = 0; i < locationArray.length; i++) {
@@ -23,5 +24,6 @@ public class CityMapper implements ResultSetMapper<City> {
         return new City(r.getLong("id"), r.getString("name"), r.getString("region_code"),
                 r.getString("country_code"), location);
     }
+
 }
 

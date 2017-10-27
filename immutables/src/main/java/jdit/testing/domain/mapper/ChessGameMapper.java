@@ -2,8 +2,8 @@ package jdit.testing.domain.mapper;
 
 import jdit.testing.domain.ImmutableChessGame;
 import jdit.testing.domain.Result;
-import org.skife.jdbi.v2.StatementContext;
-import org.skife.jdbi.v2.tweak.ResultSetMapper;
+import org.jdbi.v3.core.mapper.RowMapper;
+import org.jdbi.v3.core.statement.StatementContext;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,17 +14,17 @@ import java.sql.SQLException;
  *
  * @author Artem Prigoda
  */
-public class ChessGameMapper implements ResultSetMapper<ImmutableChessGame> {
+public class ChessGameMapper implements RowMapper<ImmutableChessGame> {
 
     private final ChessPlayerMapper chessPlayerMapper = new ChessPlayerMapper();
     private final DebutMapper debutMapper = new DebutMapper();
 
     @Override
-    public ImmutableChessGame map(int index, ResultSet r, StatementContext ctx) throws SQLException {
+    public ImmutableChessGame map(ResultSet r, StatementContext ctx) throws SQLException {
         return ImmutableChessGame.builder()
                 .white(chessPlayerMapper.map("white_", r))
                 .black(chessPlayerMapper.map("black_", r))
-                .debut(debutMapper.map(index, r, ctx))
+                .debut(debutMapper.map(r, ctx))
                 .result(Result.valueOf(r.getString("result_name").toUpperCase()))
                 .build();
     }

@@ -3,10 +3,10 @@ package jdit.testing.dao;
 import com.github.arteam.jdit.DBIRunner;
 import com.github.arteam.jdit.annotations.DBIHandle;
 import com.github.arteam.jdit.annotations.TestedSqlObject;
+import org.jdbi.v3.core.Handle;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.skife.jdbi.v2.Handle;
 
 /**
  * Date: 2/22/15
@@ -25,14 +25,14 @@ public class CityDaoTest {
 
     @Test
     public void testAddCity() throws Exception {
-        long cityId = cityDao.addCity("US", "MO", "St. Louis", new double[]{38.6272222,  -90.1977778});
+        long cityId = cityDao.addCity("US", "MO", "St. Louis", new double[]{38.6272222, -90.1977778});
         Assert.assertEquals(cityId, 1L);
     }
 
     @Test
     public void testGetCityNameById() {
         long cityId = 42L;
-        handle.insert("insert into cities(id,country_code, region_code, name, location) values (?,?,?,?, " +
+        handle.execute("insert into cities(id,country_code, region_code, name, location) values (?,?,?,?, " +
                         "array[38.6272222, -90.1977778])",
                 cityId, "US", "MO", "St. Louis");
 

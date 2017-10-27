@@ -1,6 +1,6 @@
 package jdit.testing.domain;
 
-import org.skife.jdbi.v2.sqlobject.BindingAnnotation;
+import org.jdbi.v3.sqlobject.customizer.SqlStatementCustomizingAnnotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.PARAMETER)
-@BindingAnnotation(Country.CountryBinder.class)
+@SqlStatementCustomizingAnnotation(Country.CountryBinder.class)
 public @interface BindCountry {
 
     String value() default "country";

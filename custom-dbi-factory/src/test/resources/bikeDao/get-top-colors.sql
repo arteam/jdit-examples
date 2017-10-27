@@ -8,5 +8,5 @@ with top_colors as
 select tc1.* from top_colors tc1
 where not exists(select * from top_colors tc2
  where tc1.type_name=tc2.type_name
- and (tc1.cnt<tc2.cnt or (tc1.cnt = tc2.cnt and tc1.color > tc2.color))
+ and (tc1.cnt < tc2.cnt or (tc1.cnt = tc2.cnt and tc1.color > tc2.color))
 )

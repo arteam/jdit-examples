@@ -1,8 +1,8 @@
 package jdit.testing.domain;
 
 import com.google.common.base.MoreObjects;
-import org.skife.jdbi.v2.StatementContext;
-import org.skife.jdbi.v2.tweak.ResultSetMapper;
+import org.jdbi.v3.core.mapper.RowMapper;
+import org.jdbi.v3.core.statement.StatementContext;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,14 +40,14 @@ public class Actor {
                 .toString();
     }
 
-    public static class ActorMapper implements ResultSetMapper<Actor> {
+    public static class ActorMapper implements RowMapper<Actor> {
 
         private final Country.CountryMapper countryMapper = new Country.CountryMapper();
 
         @Override
-        public Actor map(int index, ResultSet r, StatementContext ctx) throws SQLException {
+        public Actor map(ResultSet r, StatementContext ctx) throws SQLException {
             return new Actor(r.getLong("id"), r.getString("first_name"), r.getString("last_name"),
-                    Gender.valueOf(r.getString("gender").toUpperCase()), countryMapper.map(index, r, ctx));
+                    Gender.valueOf(r.getString("gender").toUpperCase()), countryMapper.map(r, ctx));
         }
     }
 }

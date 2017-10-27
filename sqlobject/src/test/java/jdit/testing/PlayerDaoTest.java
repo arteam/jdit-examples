@@ -4,18 +4,16 @@ import com.github.arteam.jdit.DBIRunner;
 import com.github.arteam.jdit.annotations.DBIHandle;
 import com.github.arteam.jdit.annotations.DataSet;
 import com.github.arteam.jdit.annotations.TestedSqlObject;
-import com.google.common.base.Optional;
-import com.google.common.collect.ImmutableList;
-import jdit.testing.Player;
-import jdit.testing.PlayerDao;
+import jersey.repackaged.com.google.common.collect.ImmutableList;
+import org.jdbi.v3.core.Handle;
 import org.joda.time.format.ISODateTimeFormat;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.skife.jdbi.v2.Handle;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -40,7 +38,10 @@ public class PlayerDaoTest {
     @Test
     public void testCreatePlayer() {
         Long playerId = playerDao.createPlayer("Vladimir", "Tarasenko", date("1991-12-13"), 184, 90);
-        List<Map<String, Object>> rows = handle.select("select * from players where id=?", playerId);
+        List<Map<String, Object>> rows = handle.createQuery("select * from players where id=?")
+                .bind(0, playerId)
+                .mapToMap()
+                .list();
         assertFalse(rows.isEmpty());
 
         Map<String, Object> row = rows.get(0);
@@ -65,7 +66,7 @@ public class PlayerDaoTest {
     }
 
     @Test
-    public void testSuccessfulPlayerSearch(){
+    public void testSuccessfulPlayerSearch() {
         Optional<Player> player = playerDao.findPlayer("Ryan", "Ellis");
         assertTrue(player.isPresent());
         assertEquals(player.get().firstName, "Ryan");
@@ -73,7 +74,7 @@ public class PlayerDaoTest {
     }
 
     @Test
-    public void testUnsuccessfulPlayerSearch(){
+    public void testUnsuccessfulPlayerSearch() {
         Optional<Player> player = playerDao.findPlayer("Jake", "Johnson");
         assertFalse(player.isPresent());
     }

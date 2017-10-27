@@ -1,11 +1,12 @@
 package jdit.testing.dao;
 
-import org.skife.jdbi.v2.sqlobject.Bind;
-import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
-import org.skife.jdbi.v2.sqlobject.SqlQuery;
-import org.skife.jdbi.v2.sqlobject.SqlUpdate;
-import org.skife.jdbi.v2.sqlobject.customizers.RegisterArgumentFactory;
-import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
+
+import org.jdbi.v3.sqlobject.config.RegisterArgumentFactory;
+import org.jdbi.v3.sqlobject.config.RegisterRowMapper;
+import org.jdbi.v3.sqlobject.customizer.Bind;
+import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys;
+import org.jdbi.v3.sqlobject.statement.SqlQuery;
+import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
 /**
  * Date: 2/22/15
@@ -13,7 +14,7 @@ import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
  *
  * @author Artem Prigoda
  */
-@RegisterMapper(CityMapper.class)
+@RegisterRowMapper(CityMapper.class)
 @RegisterArgumentFactory(DoubleArrayArgumentFactory.class)
 public interface CityDao {
 

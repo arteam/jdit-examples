@@ -1,8 +1,8 @@
 package jdit.testing.domain.mapper;
 
 import jdit.testing.domain.ImmutableDebut;
-import org.skife.jdbi.v2.StatementContext;
-import org.skife.jdbi.v2.tweak.ResultSetMapper;
+import org.jdbi.v3.core.mapper.RowMapper;
+import org.jdbi.v3.core.statement.StatementContext;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,12 +13,14 @@ import java.sql.SQLException;
  *
  * @author Artem Prigoda
  */
-public class DebutMapper implements ResultSetMapper<ImmutableDebut> {
+public class DebutMapper implements RowMapper<ImmutableDebut> {
+
     @Override
-    public ImmutableDebut map(int index, ResultSet r, StatementContext ctx) throws SQLException {
+    public ImmutableDebut map(ResultSet r, StatementContext ctx) throws SQLException {
         return ImmutableDebut.builder()
                 .code(r.getString("debut_code"))
                 .name(r.getString("debut_name"))
                 .build();
     }
+
 }

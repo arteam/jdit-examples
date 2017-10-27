@@ -1,15 +1,15 @@
 package jdit.testing;
 
-import com.google.common.base.Optional;
-import org.skife.jdbi.v2.sqlobject.Bind;
-import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
-import org.skife.jdbi.v2.sqlobject.SqlQuery;
-import org.skife.jdbi.v2.sqlobject.SqlUpdate;
-import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
-import org.skife.jdbi.v2.sqlobject.customizers.SingleValueResult;
+
+import org.jdbi.v3.sqlobject.config.RegisterRowMapper;
+import org.jdbi.v3.sqlobject.customizer.Bind;
+import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys;
+import org.jdbi.v3.sqlobject.statement.SqlQuery;
+import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Date: 2/13/15
@@ -34,8 +34,7 @@ public interface PlayerDao {
     int getAmountPlayersBornInYear(@Bind("year") int year);
 
     @SqlQuery("select * from players where first_name=:first_name and last_name=:last_name")
-    @SingleValueResult
-    @Mapper(PlayerMapper.class)
+    @RegisterRowMapper(PlayerMapper.class)
     Optional<Player> findPlayer(@Bind("first_name") String firstName,
                                 @Bind("last_name") String lastName);
 }

@@ -18,5 +18,11 @@
             <version>2.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.jdbi</groupId>
+            <artifactId>jdbi3-guava</artifactId>
+            <version>3.0.0-beta2</version>
+        </dependency>
+
     </dependencies>
 </project>

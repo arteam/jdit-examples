@@ -2,8 +2,8 @@ package jdit.testing.domain.mapper;
 
 import jdit.testing.domain.ImmutableChessPlayer;
 import jdit.testing.domain.Rank;
-import org.skife.jdbi.v2.StatementContext;
-import org.skife.jdbi.v2.tweak.ResultSetMapper;
+import org.jdbi.v3.core.mapper.RowMapper;
+import org.jdbi.v3.core.statement.StatementContext;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,10 +14,10 @@ import java.sql.SQLException;
  *
  * @author Artem Prigoda
  */
-public class ChessPlayerMapper implements ResultSetMapper<ImmutableChessPlayer> {
+public class ChessPlayerMapper implements RowMapper<ImmutableChessPlayer> {
 
     @Override
-    public ImmutableChessPlayer map(int index, ResultSet r, StatementContext ctx) throws SQLException {
+    public ImmutableChessPlayer map(ResultSet r, StatementContext ctx) throws SQLException {
         return ImmutableChessPlayer.builder()
                 .firstName(r.getString("player_first_name"))
                 .lastName(r.getString("player_last_name"))

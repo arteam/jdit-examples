@@ -1,8 +1,8 @@
 package jdit.testing.domain;
 
 import com.google.common.base.MoreObjects;
-import org.skife.jdbi.v2.StatementContext;
-import org.skife.jdbi.v2.tweak.ResultSetMapper;
+import org.jdbi.v3.core.mapper.RowMapper;
+import org.jdbi.v3.core.statement.StatementContext;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -37,10 +37,10 @@ public class Movie {
                 .toString();
     }
 
-    public static class MovieMapper implements ResultSetMapper<Movie> {
+    public static class MovieMapper implements RowMapper<Movie> {
 
         @Override
-        public Movie map(int index, ResultSet r, StatementContext ctx) throws SQLException {
+        public Movie map(ResultSet r, StatementContext statementContext) throws SQLException {
             return new Movie(r.getLong("id"), r.getString("name"), r.getInt("year"), r.getString("director"));
         }
     }

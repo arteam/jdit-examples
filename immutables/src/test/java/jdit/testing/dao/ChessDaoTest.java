@@ -10,7 +10,7 @@ import jdit.testing.domain.Result;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(DBIRunner.class)
 @DataSet({"chessDao/debuts.sql", "chessDao/ranks.sql", "chessDao/players.sql",

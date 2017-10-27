@@ -1,13 +1,15 @@
 package jdit.testing.domain;
 
 import com.google.common.base.MoreObjects;
-import org.skife.jdbi.v2.SQLStatement;
-import org.skife.jdbi.v2.StatementContext;
-import org.skife.jdbi.v2.sqlobject.Binder;
-import org.skife.jdbi.v2.sqlobject.BinderFactory;
-import org.skife.jdbi.v2.tweak.ResultSetMapper;
+import org.jdbi.v3.core.mapper.RowMapper;
+import org.jdbi.v3.core.statement.StatementContext;
+import org.jdbi.v3.sqlobject.customizer.SqlStatementCustomizerFactory;
+import org.jdbi.v3.sqlobject.customizer.SqlStatementParameterCustomizer;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
+import java.lang.reflect.Type;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -37,22 +39,23 @@ public class Country {
                 .toString();
     }
 
-    public static class CountryMapper implements ResultSetMapper<Country> {
+    public static class CountryMapper implements RowMapper<Country> {
         @Override
-        public Country map(int index, ResultSet r, StatementContext ctx) throws SQLException {
+        public Country map(ResultSet r, StatementContext statementContext) throws SQLException {
             return new Country(r.getString("alpha2_code"), r.getString("name"));
         }
     }
 
-    public static class CountryBinder implements BinderFactory {
+    public static class CountryBinder implements SqlStatementCustomizerFactory {
+
         @Override
-        public Binder build(Annotation annotation) {
-            return new Binder<BindCountry, Country>() {
-                @Override
-                public void bind(SQLStatement<?> q, BindCountry bind, Country arg) {
-                    q.bind(bind.value() + "." + "code", arg.code);
-                    q.bind(bind.value() + "." + "name", arg.name);
-                }
+        public SqlStatementParameterCustomizer createForParameter(Annotation annotation, Class<?> sqlObjectType,
+                                                                  Method method, Parameter param, int index,
+                                                                  Type paramType) {
+            return (q, arg) -> {
+                Country c = (Country) arg;
+                q.bind("country" + "." + "code", c.code);
+                q.bind("country" + "." + "name", c.name);
             };
         }
     }

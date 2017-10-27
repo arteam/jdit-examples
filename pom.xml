@@ -53,14 +53,32 @@
         <dependency>
             <groupId>com.github.arteam</groupId>
             <artifactId>jdit</artifactId>
-            <version>0.5</version>
+            <version>0.7</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>io.dropwizard</groupId>
-            <artifactId>dropwizard-jdbi</artifactId>
-            <version>1.0.0</version>
+            <groupId>com.github.arteam</groupId>
+            <artifactId>dropwizard-jdbi3</artifactId>
+            <version>1.0-rc4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jdbi</groupId>
+            <artifactId>jdbi3-sqlobject</artifactId>
+            <version>3.0.0-beta2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>21.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jdbi</groupId>
+            <artifactId>jdbi3-stringtemplate4</artifactId>
+            <version>3.0.0-beta2</version>
         </dependency>
 
         <dependency>
@@ -78,5 +96,5 @@
             <url>http://jcenter.bintray.com</url>
         </repository>
     </repositories>
-    
+
 </project>
